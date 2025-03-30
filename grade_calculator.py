@@ -19,10 +19,18 @@ while True:
     name = input("Enter student name (or 'quit' to stop): ")
     if name.lower() == "quit":
         break
-    score = int(input(f"Enter {name}'s score (0-100): "))
-    grade = calculate_grade(score)
-    grades.append({"name": name, "score": score, "grade": grade})
-    print(f"{name} got a grade of {grade}")
+    try:
+        score = int(input(f"Enter {name}'s score (0-100): "))
+        if 0 <= score <= 100:
+            grade = calculate_grade(score)
+            grades.append({"name": name, "score": score, "grade": grade})
+            print(f"{name} got a grade of {grade}")
+            break
+        else:
+            print("Score must be between 0 and 100.")
+    except ValueError:
+        print("Please enter a valid number!")
+    
 
 # Print all results
 print("\n--- Final Results ---")
